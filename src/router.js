@@ -1,10 +1,10 @@
 import {
   StackNavigator,
 } from 'react-navigation';
-import Home from './containers/home'
+import Welcome from './containers/welcome'
 
 export default StackNavigator({
-  Home: { screen: Home },
+  Home: { screen: Welcome },
 }, {
 	headerMode: 'none'
 })
