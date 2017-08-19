@@ -19,3 +19,11 @@ What things you need to install the software and how to install them
 * If you have ran the project before, and now you are getting an unknown error, do "cd android && gradlew clean && cd ..", it might be fixed.
 * Do "react-native run-android".
 
+### Screenshots
+
+* welcome
+
+![Alt Text](https://media.giphy.com/media/l3fzZDZQ23CvEk4Ni/giphy.gif)
+
+
+
