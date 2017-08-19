@@ -8,7 +8,7 @@ import {
 import Swiper from 'react-native-swiper'
 import Logo from '../../assets/logo.png'
 class Slider extends Component {
-  render() {
+  render () {
   	const makeSlide = (data, index) => ( 
   		<View style={styles.slide} key={index}>
 	  		<View style={[styles.photo, {backgroundColor: data.photoBackgroundColor}]}>

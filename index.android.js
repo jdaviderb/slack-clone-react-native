@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
-import Router from './src/router'
+import App from './src/app'
 
 
-AppRegistry.registerComponent('slack', () => Router)
+AppRegistry.registerComponent('slack', () => App)
