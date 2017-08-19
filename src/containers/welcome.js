@@ -7,34 +7,31 @@ import {
 } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Slider from '../components/slider'
-import Logo from '../../assets/logo.png'
-import {connect} from 'react-redux'
-class Welcome extends Component {
-  render () {
-    return (
-     <View style={styles.wrapper} >
-          <Slider
-            slides={this.props.slides}
-           />
-        <View style={styles.options}>
-          <Button
-            style={[styles.button, {borderRightWidth: 1, borderColor: '#104468'}]}
-            textStyle={styles.buttonText}
-          >
-            SIGN IN
-          </Button>
+import { connect } from 'react-redux'
 
-          <Button
-            style={styles.button}
-            textStyle={styles.buttonText}
-          >
-            CREATE TEAM
-          </Button>
-        </View>
+const welcome =  ({slides}) => (
+  <View style={styles.wrapper} >
+       <Slider
+         slides={slides}
+        />
+     <View style={styles.options}>
+       <Button
+         style={[styles.button, {borderRightWidth: 1, borderColor: '#104468'}]}
+         textStyle={styles.buttonText}
+       >
+         SIGN IN
+       </Button>
+
+       <Button
+         style={styles.button}
+         textStyle={styles.buttonText}
+       >
+         CREATE TEAM
+       </Button>
      </View>
-    )
-  }
-}
+  </View>
+
+)
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -64,4 +61,4 @@ const mapStateToProps  = ({welcome}) => ({
   slides: welcome
 })
 
-export default connect(mapStateToProps)(Welcome)
+export default connect(mapStateToProps)(welcome)
