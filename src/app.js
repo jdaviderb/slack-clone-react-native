@@ -1,9 +1,13 @@
 import React, {component} from 'react'
-import Router from './router'
+import Navigator from './containers/navigator'
 import {Provider} from 'react-redux'
 import store from './store'
-export default () => (
+
+const App =  () => (
 		<Provider store={store}>
-			<Router />
+			<Navigator />
 		</Provider>
 )
+
+
+export default App

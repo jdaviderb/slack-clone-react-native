@@ -4,8 +4,9 @@ import styles from '../styles/welcome'
 import Button from 'apsl-react-native-button'
 import Slider from '../components/slider'
 import { connect } from 'react-redux'
+import { goTo } from '../actions/navigator'
 
-const welcome =  ({slides}) => (
+const welcome =  ({slides, goCreateTeam}) => (
   <View style={styles.wrapper} >
        <Slider
          slides={slides}
@@ -13,6 +14,7 @@ const welcome =  ({slides}) => (
      <View style={styles.options}>
        <Button
          style={[styles.button, {borderRightWidth: 1, borderColor: '#104468'}]}
+         onPress={goCreateTeam}
          textStyle={styles.buttonText}
        >
          SIGN IN
@@ -33,4 +35,8 @@ const mapStateToProps  = ({welcome}) => ({
   slides: welcome
 })
 
-export default connect(mapStateToProps)(welcome)
+const mapDispatchToProps = (dispatch) => ({
+  goCreateTeam: () => dispatch(goTo('CreateTeam'))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(welcome)
