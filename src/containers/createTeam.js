@@ -9,49 +9,52 @@ import Button from 'apsl-react-native-button'
 import { connect } from 'react-redux'
 import { updateFormTeam } from '../actions/team'
 import { goTo } from '../actions/navigator'
+import LoadingBar from '../components/loadingBar'
 class createTeam extends Component {
   render() {
     const {team, updateForm, goToConfirmTeam} = this.props
     return (
-      <View style={styles.container}>
-      	<View style={styles.content}>
-          <View style={{width: '100%'}}>
-            <TextField
-              autoCapitalize='none'
-              keyboardType="email-address"
-              tintColor="white"
-              value={team.form.email}
-              fontSize={16}
-              baseColor="white"
-              textColor={'white'}
-              style={{width: '100%'}}
-              label='Email address'
-              onChangeText={((email) => updateForm('email', email) )}
-            />
+      <LoadingBar background="#3B87C1" backgroundValue="#FFFFFF" value={10}>
+        <View style={styles.container}>
+        	<View style={styles.content}>
+            <View style={{width: '100%'}}>
+              <TextField
+                autoCapitalize='none'
+                keyboardType="email-address"
+                tintColor="white"
+                value={team.form.email}
+                fontSize={16}
+                baseColor="white"
+                textColor={'white'}
+                style={{width: '100%'}}
+                label='Email address'
+                onChangeText={((email) => updateForm('email', email) )}
+              />
+            </View>
+            <Text style={styles.description}> 
+              We suggest using your work email if you're creating{'\n'}
+              for your business, departament, or project {'\n'}
+            </Text>
           </View>
-          <Text style={styles.description}> 
-            We suggest using your work email if you're creating{'\n'}
-            for your business, departament, or project {'\n'}
-          </Text>
+          <View style={styles.options}>
+            <Button 
+              style={styles.button}
+              textStyle={styles.buttonText}
+            >
+              Google accounts
+            </Button>
+            <Button 
+              disabled={true}
+              style={[styles.button, styles.nextButton]}
+              isDisabled={!team.validForm}
+              textStyle={[styles.buttonText, {color: '#419FDD'}]}
+              onPress={goToConfirmTeam}
+            >
+              Next
+            </Button>
+          </View>
         </View>
-        <View style={styles.options}>
-          <Button 
-            style={styles.button}
-            textStyle={styles.buttonText}
-          >
-            Google accounts
-          </Button>
-          <Button 
-            disabled={true}
-            style={[styles.button, styles.nextButton]}
-            isDisabled={!team.validForm}
-            textStyle={[styles.buttonText, {color: '#419FDD'}]}
-            onPress={goToConfirmTeam}
-          >
-            Next
-          </Button>
-        </View>
-      </View>
+      </LoadingBar>
     )
   }
 }

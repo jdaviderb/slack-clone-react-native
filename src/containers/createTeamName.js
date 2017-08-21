@@ -9,43 +9,47 @@ import Button from 'apsl-react-native-button'
 import { connect } from 'react-redux'
 import { updateFormTeam } from '../actions/team'
 import { goTo } from '../actions/navigator'
+import LoadingBar from '../components/loadingBar'
+
 class createTeamName extends Component {
   render() {
     const {team, updateForm, goToConfirmTeam} = this.props
     return (
-      <View style={styles.container}>
-      	<View style={styles.content}>
-          <View style={{width: '100%'}}>
-            <TextField
-              autoCapitalize='none'
-              tintColor="white"
-              value={team.form.name}
-              fontSize={16}
-              baseColor="rgba(255,255,255,.6)"
-              textColor={'white'}
-              style={{width: '100%'}}
-              label='Name your team slack'
-              onChangeText={((name) => updateForm('name', name) )}
-            />
+      <LoadingBar background="#6F56B1" backgroundValue="#FFFFFF" value={50}>
+        <View style={styles.container}>
+        	<View style={styles.content}>
+            <View style={{width: '100%'}}>
+              <TextField
+                autoCapitalize='none'
+                tintColor="white"
+                value={team.form.name}
+                fontSize={16}
+                baseColor="rgba(255,255,255,.6)"
+                textColor={'white'}
+                style={{width: '100%'}}
+                label='Name your team slack'
+                onChangeText={((name) => updateForm('name', name) )}
+              />
+            </View>
+            <Text style={styles.description}> 
+              We'll use this name your Slack team. You can{'\n'}
+              always change it later {'\n'}
+            </Text>
           </View>
-          <Text style={styles.description}> 
-            We'll use this name your Slack team. You can{'\n'}
-            always change it later {'\n'}
-          </Text>
+          <View style={styles.options}>
+            
+            <Button 
+              disabled={true}
+              style={[styles.button, styles.nextButton]}
+              isDisabled={team.form.name.length ===  0}
+              textStyle={[styles.buttonText, {color: '#419FDD'}]}
+              onPress={goToConfirmTeam}
+            >
+              Next
+            </Button>
+          </View>
         </View>
-        <View style={styles.options}>
-          
-          <Button 
-            disabled={true}
-            style={[styles.button, styles.nextButton]}
-            isDisabled={team.form.name.length ===  0}
-            textStyle={[styles.buttonText, {color: '#419FDD'}]}
-            onPress={goToConfirmTeam}
-          >
-            Next
-          </Button>
-        </View>
-      </View>
+      </LoadingBar>
     )
   }
 }

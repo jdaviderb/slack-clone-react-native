@@ -10,41 +10,44 @@ import { connect } from 'react-redux'
 import SecurityCode from '../components/securityCode'
 import {updateFormTeam} from '../actions/team'
 import { goTo } from '../actions/navigator'
+import LoadingBar from '../components/loadingBar'
 
 class ConfirmTeam extends Component {
   render() {
     const {team, updateForm, goCreateTeamName} = this.props
     return (
-      <View style={styles.container}>
-      	<View style={styles.content}>
-          <SecurityCode 
-            value={team.form.security}
-            onChangeValue={ (digit) => updateForm('security', digit) }
-          />
-          <Text style={styles.description}> 
-            We-ve sent six-digit confirmation code to 
-            {' '} {team.form.email}. Enter it here to confirm your
-            email address
-          </Text>
+      <LoadingBar background="#3B87C1" backgroundValue="#FFFFFF" value={30}>
+        <View style={styles.container}>
+        	<View style={styles.content}>
+            <SecurityCode 
+              value={team.form.security}
+              onChangeValue={ (digit) => updateForm('security', digit) }
+            />
+            <Text style={styles.description}> 
+              We-ve sent six-digit confirmation code to 
+              {' '} {team.form.email}. Enter it here to confirm your
+              email address
+            </Text>
+          </View>
+          <View style={styles.options}>
+            <Button 
+              style={styles.button}
+              textStyle={styles.buttonText}
+            >
+              Resend code
+            </Button>
+            <Button 
+              disabled={true}
+              onPress={goCreateTeamName}
+              style={[styles.button, styles.nextButton]}
+              isDisabled={team.form.security.length !== 6}
+              textStyle={[styles.buttonText, {color: '#419FDD'}]}
+            >
+              Next
+            </Button>
+          </View>
         </View>
-        <View style={styles.options}>
-          <Button 
-            style={styles.button}
-            textStyle={styles.buttonText}
-          >
-            Resend code
-          </Button>
-          <Button 
-            disabled={true}
-            onPress={goCreateTeamName}
-            style={[styles.button, styles.nextButton]}
-            isDisabled={team.form.security.length !== 6}
-            textStyle={[styles.buttonText, {color: '#419FDD'}]}
-          >
-            Next
-          </Button>
-        </View>
-      </View>
+      </LoadingBar>
     )
   }
 }
