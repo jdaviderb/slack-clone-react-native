@@ -25,5 +25,9 @@ What things you need to install the software and how to install them
 
 ![Alt Text](https://media.giphy.com/media/l3fzZDZQ23CvEk4Ni/giphy.gif)
 
+* create team (Not all views are complete)
+
+![Alt Text](https://media.giphy.com/media/3owvKpGNTDY6raTOxO/giphy.gif)
+
 
 
