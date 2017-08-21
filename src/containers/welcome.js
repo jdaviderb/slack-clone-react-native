@@ -14,7 +14,6 @@ const welcome =  ({slides, goCreateTeam}) => (
      <View style={styles.options}>
        <Button
          style={[styles.button, {borderRightWidth: 1, borderColor: '#104468'}]}
-         onPress={goCreateTeam}
          textStyle={styles.buttonText}
        >
          SIGN IN
@@ -22,6 +21,7 @@ const welcome =  ({slides, goCreateTeam}) => (
 
        <Button
          style={styles.button}
+         onPress={goCreateTeam}
          textStyle={styles.buttonText}
        >
          CREATE TEAM

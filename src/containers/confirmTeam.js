@@ -7,31 +7,24 @@ import {
 import { TextField } from 'react-native-material-textfield';
 import Button from 'apsl-react-native-button'
 import { connect } from 'react-redux'
-import { updateFormTeam } from '../actions/team'
+import SecurityCode from '../components/securityCode'
+import {updateFormTeam} from '../actions/team'
 import { goTo } from '../actions/navigator'
-class createTeam extends Component {
+
+class ConfirmTeam extends Component {
   render() {
-    const {team, updateForm, goToConfirmTeam} = this.props
+    const {team, updateForm, goCreateTeamName} = this.props
     return (
       <View style={styles.container}>
       	<View style={styles.content}>
-          <View style={{width: '100%'}}>
-            <TextField
-              autoCapitalize='none'
-              keyboardType="email-address"
-              tintColor="white"
-              value={team.form.email}
-              fontSize={16}
-              baseColor="white"
-              textColor={'white'}
-              style={{width: '100%'}}
-              label='Email address'
-              onChangeText={((email) => updateForm('email', email) )}
-            />
-          </View>
+          <SecurityCode 
+            value={team.form.security}
+            onChangeValue={ (digit) => updateForm('security', digit) }
+          />
           <Text style={styles.description}> 
-            We suggest using your work email if you're creating{'\n'}
-            for your business, departament, or project {'\n'}
+            We-ve sent six-digit confirmation code to 
+            {' '} {team.form.email}. Enter it here to confirm your
+            email address
           </Text>
         </View>
         <View style={styles.options}>
@@ -39,14 +32,14 @@ class createTeam extends Component {
             style={styles.button}
             textStyle={styles.buttonText}
           >
-            Google accounts
+            Resend code
           </Button>
           <Button 
             disabled={true}
+            onPress={goCreateTeamName}
             style={[styles.button, styles.nextButton]}
-            isDisabled={!team.validForm}
+            isDisabled={team.form.security.length !== 6}
             textStyle={[styles.buttonText, {color: '#419FDD'}]}
-            onPress={goToConfirmTeam}
           >
             Next
           </Button>
@@ -66,6 +59,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
     flex: 1,
@@ -96,7 +90,7 @@ const mapStateToProp = ({team}) => ({
 
 const mapDispatchToProp = (dispatch) => ({
   updateForm: (key, value) => dispatch(updateFormTeam(key, value)),
-  goToConfirmTeam: () => dispatch(goTo('ConfirmTeam'))
+  goCreateTeamName: () => dispatch(goTo('CreateTeamName'))
 })
 
-export default connect(mapStateToProp,mapDispatchToProp)(createTeam)
+export default connect(mapStateToProp,mapDispatchToProp)(ConfirmTeam)

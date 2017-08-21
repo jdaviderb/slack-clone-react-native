@@ -9,7 +9,7 @@ import Button from 'apsl-react-native-button'
 import { connect } from 'react-redux'
 import { updateFormTeam } from '../actions/team'
 import { goTo } from '../actions/navigator'
-class createTeam extends Component {
+class createTeamName extends Component {
   render() {
     const {team, updateForm, goToConfirmTeam} = this.props
     return (
@@ -18,33 +18,27 @@ class createTeam extends Component {
           <View style={{width: '100%'}}>
             <TextField
               autoCapitalize='none'
-              keyboardType="email-address"
               tintColor="white"
-              value={team.form.email}
+              value={team.form.name}
               fontSize={16}
-              baseColor="white"
+              baseColor="rgba(255,255,255,.6)"
               textColor={'white'}
               style={{width: '100%'}}
-              label='Email address'
-              onChangeText={((email) => updateForm('email', email) )}
+              label='Name your team slack'
+              onChangeText={((name) => updateForm('name', name) )}
             />
           </View>
           <Text style={styles.description}> 
-            We suggest using your work email if you're creating{'\n'}
-            for your business, departament, or project {'\n'}
+            We'll use this name your Slack team. You can{'\n'}
+            always change it later {'\n'}
           </Text>
         </View>
         <View style={styles.options}>
-          <Button 
-            style={styles.button}
-            textStyle={styles.buttonText}
-          >
-            Google accounts
-          </Button>
+          
           <Button 
             disabled={true}
             style={[styles.button, styles.nextButton]}
-            isDisabled={!team.validForm}
+            isDisabled={team.form.name.length ===  0}
             textStyle={[styles.buttonText, {color: '#419FDD'}]}
             onPress={goToConfirmTeam}
           >
@@ -60,7 +54,7 @@ class createTeam extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#419FDD',
+    backgroundColor: '#7C60C4',
     padding: 10
   },
   content: {
@@ -68,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    flex: 1,
+    minWidth: '50%',
     margin: 3,
     borderColor: 'rgba(255,255,255, 0.6)'
   },
@@ -85,7 +79,8 @@ const styles = StyleSheet.create({
   options: {
     flexDirection: 'row',
     width: '100%',
-    minHeight: '10%'
+    minHeight: '10%',
+    justifyContent: 'flex-end'
   }
 })
 
@@ -99,4 +94,4 @@ const mapDispatchToProp = (dispatch) => ({
   goToConfirmTeam: () => dispatch(goTo('ConfirmTeam'))
 })
 
-export default connect(mapStateToProp,mapDispatchToProp)(createTeam)
+export default connect(mapStateToProp,mapDispatchToProp)(createTeamName)
